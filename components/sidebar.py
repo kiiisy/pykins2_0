@@ -83,7 +83,7 @@ class NavBar(UserControl):
             height=600,
             padding=padding.only(top=5),
             alignment=alignment.center,
-            bgcolor="#1d1d1d",
+            bgcolor="#131313",
             border_radius=10,
             margin=10,
             content=Column(
