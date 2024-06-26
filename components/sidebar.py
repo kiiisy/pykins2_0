@@ -26,10 +26,10 @@ from flet import(
 
 class NavBar(UserControl):
     def __init__(self, page: Page, func1, func2):
+        super().__init__()
         self.page = page
         self.func1 = func1
         self.func2 = func2
-        super().__init__()
 
     def highlight(self, e):
         if e.data == "true":
