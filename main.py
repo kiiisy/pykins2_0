@@ -17,7 +17,7 @@ def main(page: Page):
     page.window_width = 1000
     page.window_height = 650
     page.window_resizable = False
-    page.bgcolor = "black"
+    page.bgcolor = "#000000"
     page.padding = 0
     page.spacing = 0
 

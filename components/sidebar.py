@@ -31,33 +31,33 @@ class NavBar(UserControl):
         self.func2 = func2
         super().__init__()
 
-    def HighLight(self, e):
+    def highlight(self, e):
         if e.data == "true":
-            e.control.bgcolor = "white10"
+            e.control.bgcolor = "#404040"
             e.control.update()
-            e.control.content.controls[0].icon_color = "white"
-            e.control.content.controls[1].color = "white"
+            e.control.content.controls[0].icon_color = "#eeeeee"
+            e.control.content.controls[1].color = "#eeeeee"
             e.control.content.update()
         else:
             e.control.bgcolor = None
             e.control.update()
-            e.control.content.controls[0].icon_color = "white24"
-            e.control.content.controls[1].color = "white24"
+            e.control.content.controls[0].icon_color = "#424242"
+            e.control.content.controls[1].color = "#424242"
             e.control.content.update()
 
-    def ContainerdIcon(self, icon_name: str, text: str):
+    def containerd_icon(self, icon_name: str, text: str):
         return Container(
             width=130,
             height=45,
             border_radius=10,
-            on_hover=lambda e: self.HighLight(e),
+            on_hover=lambda e: self.highlight(e),
             content=Row(
                 controls=[
                     IconButton(
                         on_click=partial(self.func2),
                         icon=icon_name,
                         icon_size=25,
-                        icon_color="white54",
+                        icon_color="#424242",
                         style=ButtonStyle(
                             shape={
                                 "": RoundedRectangleBorder(radius=7),
@@ -67,10 +67,11 @@ class NavBar(UserControl):
                     ),
                     Text(
                         value=text,
-                        color="white54",
+                        color="#424242",
                         size=15,
                         opacity=1,
                         animate_opacity=200,
+                        font_family="Arial",
                     ),
                 ]
             ),
@@ -82,7 +83,7 @@ class NavBar(UserControl):
             height=600,
             padding=padding.only(top=5),
             alignment=alignment.center,
-            bgcolor="white10",
+            bgcolor="#1d1d1d",
             border_radius=10,
             margin=10,
             content=Column(
@@ -90,16 +91,16 @@ class NavBar(UserControl):
                 controls=[
                     IconButton(
                         icon="menu",
-                        icon_color="white",
+                        icon_color="#eeeeee",
                         icon_size=25,
                         on_click=partial(self.func1)
                     ),
-                    self.ContainerdIcon(icons.BUILD_ROUNDED, "Auto Build"),
-                    self.ContainerdIcon(icons.WAVES_ROUNDED, "Auto Sim"),
-                    self.ContainerdIcon(icons.EDIT_ROUNDED, "Edit job"),
-                    self.ContainerdIcon(icons.DASHBOARD_ROUNDED, "List jobs"),
-                    Divider(height=5, color="white24"),
-                    self.ContainerdIcon(icons.SETTINGS_ROUNDED, "Setting"),
+                    self.containerd_icon(icons.BUILD_ROUNDED, "Auto Build"),
+                    self.containerd_icon(icons.WAVES_ROUNDED, "Auto Sim"),
+                    self.containerd_icon(icons.EDIT_ROUNDED, "Edit job"),
+                    self.containerd_icon(icons.DASHBOARD_ROUNDED, "List jobs"),
+                    Divider(height=5, color="#383838"),
+                    self.containerd_icon(icons.SETTINGS_ROUNDED, "Setting"),
                 ]
             ),
         )

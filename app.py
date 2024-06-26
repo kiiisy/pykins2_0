@@ -37,14 +37,14 @@ class Pykins(UserControl):
 
         # ボディ作成
         self.mycontents = Container(
-            width=800,
+            width=780,
             height=600,
             padding=10,
             margin=10,
             gradient=LinearGradient(
-                begin=alignment.center,
+                begin=alignment.top_center,
                 end=alignment.bottom_center,
-                colors=["#5C00A3", "#000000"],
+                colors=["0xff1f005c","0x00000000"],
             ),
             border_radius=10,
             content=self.body_list[0],
@@ -88,14 +88,14 @@ class Pykins(UserControl):
         # サイドバーの大きさ変更による画面サイズの調整
         if navbar.width != 42:
             navbar.width = 42
-            body.width = 900
+            body.width = 890
             if isinstance(body.content, AutoBuildBody):
                 self.format_body0(body.content, 1)
             body.update()
             navbar.update()
         else:
             navbar.width = 150
-            body.width = 800
+            body.width = 780
             if isinstance(body.content, AutoBuildBody):
                 self.format_body0(body.content, 0)
             body.update()
@@ -133,17 +133,17 @@ class Pykins(UserControl):
         #   :Row.controls[1].TextButton
         # 13:Row.controls[0].ElevatedButton
         if is_expanded:
-            body.controls[0].controls[1].controls[0].width = 434
-            body.controls[0].controls[1].controls[1].width = 434
-            body.controls[0].controls[5].controls[0].width = 434
-            body.controls[0].controls[5].controls[1].width = 434
+            body.controls[0].controls[1].controls[0].width = 430
+            body.controls[0].controls[1].controls[1].width = 430
+            body.controls[0].controls[5].controls[0].width = 430
+            body.controls[0].controls[5].controls[1].width = 430
             body.controls[0].controls[11].spacing = 50
             body.controls[0].controls[12].spacing = 40
         else :
-            body.controls[0].controls[1].controls[0].width = 384
-            body.controls[0].controls[1].controls[1].width = 384
-            body.controls[0].controls[5].controls[0].width = 384
-            body.controls[0].controls[5].controls[1].width = 384
+            body.controls[0].controls[1].controls[0].width = 376
+            body.controls[0].controls[1].controls[1].width = 376
+            body.controls[0].controls[5].controls[0].width = 376
+            body.controls[0].controls[5].controls[1].width = 376
             body.controls[0].controls[11].spacing = 35
             body.controls[0].controls[12].spacing = 25
 
