@@ -33,7 +33,7 @@ class Pykins(UserControl):
         super().__init__()
         self.page = page
         self.jenkins = jmodule.MyJenkins()
-        self.body_list = [AutoBuildBody(self.page, self.jenkins), AutoSimBody(), EditJobBody(), DashboardBody()]
+        self.body_list = [AutoBuildBody(self.page, self.jenkins), AutoSimBody(), EditJobBody(), DashboardBody(self.page, self.jenkins)]
 
         # ボディ作成
         self.mycontents = Container(

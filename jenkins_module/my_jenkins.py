@@ -9,30 +9,23 @@
 from typing import Tuple
 import xml.etree.ElementTree as ET
 import jenkins
-
-JENKINS_URL = ''
-API_KEY = ''
-USER_NAME = ''
-BASE_JOB_NAME = ''
+from settings import Config
 
 
 class MyJenkins():
-
     def __init__(self) -> None:
-        #self.server = jenkins.Jenkins(JENKINS_URL, username=USER_NAME, password=API_KEY)
-        #self.user = self.server.get_whoami()
-        #self.base_job_config = self.server.get_job_config(BASE_JOB_NAME)
-        self.new_job_config = ''
+        self.props = Config()
+        self.server = jenkins.Jenkins(self.props.jenkins_url, username=self.props.user_name, password=self.props.jenkins_apikey)
 
     def create(self, job_name: str, job_desc: str, git_url: str, git_branch: str,
                teams_url: str, target_folder: str, weekday: Tuple[int], build_time: str) -> bool:
+        base_job_config = self.server.get_job_config(self.props.base_job_name)
         result = True
 
-        #base_job_config = self.base_job_config
-        #new_job_config = self._edit(job_name, base_job_config, job_desc, git_url, git_branch,
-        #                            teams_url, target_folder, weekday, build_time)
+        new_job_config = self._edit(job_name, base_job_config, job_desc, git_url, git_branch,
+                                    teams_url, target_folder, weekday, build_time)
 
-        #self.server.create_job(job_name, new_job_config)
+        self.server.create_job(job_name, new_job_config)
 
         return result
 
@@ -91,8 +84,11 @@ class MyJenkins():
         return ET.tostring(root, encoding='utf-8').decode('utf-8')
 
     def _conversion_time(self, weekday: Tuple[int], build_time: str) -> str:
-        time = 'H' + ' '
-        time = time + build_time + ' '  + '*' + ' ' + '*' + ' '
+        build_time_split = build_time.split(":")
+        hour = build_time_split[0]
+        # 0分の場合はHのハッシュを使用する(Jenkins的にはHが推奨らしいので)
+        minute = 'H' if build_time_split[1] == "0" else build_time_split[1]
+        time = minute + ' ' + hour + ' '  + '*' + ' ' + '*' + ' '
 
         active_days = []
         start_day = None

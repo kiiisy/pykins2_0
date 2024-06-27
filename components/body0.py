@@ -179,18 +179,28 @@ class AutoBuildBody(UserControl):
         self.button = ElevatedButton(
             text="実行",
             color="#f8f8ff",
-            bgcolor="#0054FF",
+            bgcolor="#1e90ff",
             width=150,
-            style=ButtonStyle(overlay_color="#0000cd"),
+            style=ButtonStyle(overlay_color="#0054FF"),
             on_click=self.handle_open_dlg,
         )
-        self.dlg = AlertDialog(
+        self.dlg_ok = AlertDialog(
             # ダイアログの外側をクリックして閉じれないようにする
             modal=True,
-            title=Text("Alert Dialog", size=25, font_family="Arial"),
+            title=Text("Input Dialog", size=25, font_family="Arial"),
+            content=Text("Job登録完了!!", size=15, font_family="YuGothic"),
+            actions=[
+                TextButton("閉じる", on_click=self.handle_close_dlg_ok),
+            ],
+            actions_alignment=MainAxisAlignment.END,
+        )
+        self.dlg_ng = AlertDialog(
+            # ダイアログの外側をクリックして閉じれないようにする
+            modal=True,
+            title=Text("Input Dialog", size=25, font_family="Arial"),
             content=Text("必須項目を入力してください", size=15, font_family="YuGothic"),
             actions=[
-                TextButton("閉じる", on_click=self.handle_close_dlg),
+                TextButton("閉じる", on_click=self.handle_close_dlg_ng),
             ],
             actions_alignment=MainAxisAlignment.END,
         )
@@ -277,21 +287,28 @@ class AutoBuildBody(UserControl):
         self.timer_picker_value_ref.current.value = str(time_[3]) + ":" + str(time_[4])
         self.page.controls[0].controls[0].content.controls[1].content.update()
 
-    def handle_close_dlg(self, e):
-        self.dlg.open = False
+    def handle_close_dlg_ok(self, e):
+        self.dlg_ok.open = False
+        e.control.page.update()
+
+    def handle_close_dlg_ng(self, e):
+        self.dlg_ng.open = False
         e.control.page.update()
 
     def handle_open_dlg(self, e):
         result = self.check_input(e)
 
-        # インプット確認で問題があればダイアログを表示し、
+        # インプット確認で問題があればその旨をダイアログを表示し、
         # 問題がなければJenkinsへデータを送信する
         if result != 0:
-            e.control.page.dialog = self.dlg
-            self.dlg.open = True
+            e.control.page.dialog = self.dlg_ng
+            self.dlg_ng.open = True
             e.control.page.update()
         else:
             self.send_input(e)
+            e.control.page.dialog = self.dlg_ok
+            self.dlg_ok.open = True
+            e.control.page.update()
 
     def did_mount(self):
         # タイムピッカーを現在のページにマウント
@@ -318,9 +335,9 @@ class AutoBuildBody(UserControl):
         weekday = (is_sun, is_mon, is_tue, is_wed, is_thu, is_fri, is_sat)
 
         # タイムピッカーのデータ取得
-        build_time = self.timer_picker_value_ref
+        build_time = self.timer_picker_value_ref.current.value
 
-        #result = self.jenkins.create(job_name, job_desc, git_url, git_branch, teams_url, build_folder, weekday, build_time)
+        result = self.jenkins.create(job_name, job_desc, git_url, git_branch, teams_url, build_folder, weekday, build_time)
 
     def check_input(self, e):
         result = 0

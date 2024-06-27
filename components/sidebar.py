@@ -41,8 +41,8 @@ class NavBar(UserControl):
         else:
             e.control.bgcolor = None
             e.control.update()
-            e.control.content.controls[0].icon_color = "#424242"
-            e.control.content.controls[1].color = "#424242"
+            e.control.content.controls[0].icon_color = "#555555"
+            e.control.content.controls[1].color = "#555555"
             e.control.content.update()
 
     def containerd_icon(self, icon_name: str, text: str):
@@ -57,7 +57,7 @@ class NavBar(UserControl):
                         on_click=partial(self.func2),
                         icon=icon_name,
                         icon_size=25,
-                        icon_color="#424242",
+                        icon_color="#555555",
                         style=ButtonStyle(
                             shape={
                                 "": RoundedRectangleBorder(radius=7),
@@ -67,7 +67,7 @@ class NavBar(UserControl):
                     ),
                     Text(
                         value=text,
-                        color="#424242",
+                        color="#555555",
                         size=15,
                         opacity=1,
                         animate_opacity=200,
@@ -83,7 +83,7 @@ class NavBar(UserControl):
             height=600,
             padding=padding.only(top=5),
             alignment=alignment.center,
-            bgcolor="#131313",
+            bgcolor="#1f1f1f",
             border_radius=10,
             margin=10,
             content=Column(
