@@ -5,7 +5,7 @@ from flet import(
 )
 
 
-class AutoSimBody(UserControl):
+class SettingsBody(UserControl):
     def __init__(self):
         super().__init__()
         self.text = Text("準備中", size=100, color="#ffffff")

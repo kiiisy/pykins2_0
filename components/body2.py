@@ -1,17 +1,17 @@
 from flet import(
     UserControl,
     Text,
-    Row
+    Row,
 )
 
 
 class EditJobBody(UserControl):
     def __init__(self):
         super().__init__()
-        self.text = Text("page2")
-        self.text2 = Text("example")
+        self.text = Text("準備中", size=100, color="#ffffff")
 
     def build(self):
-        return Row(controls=[
-            self.text, self.text2
+        return Row(
+            controls=[
+            self.text,
         ])

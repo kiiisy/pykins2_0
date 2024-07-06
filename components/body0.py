@@ -187,7 +187,7 @@ class AutoBuildBody(UserControl):
         self.dlg_ok = AlertDialog(
             # ダイアログの外側をクリックして閉じれないようにする
             modal=True,
-            title=Text("Input Dialog", size=25, font_family="Arial"),
+            title=Text("Dialog", size=25, font_family="Arial"),
             content=Text("Job登録完了!!", size=15, font_family="YuGothic"),
             actions=[
                 TextButton("閉じる", on_click=self.handle_close_dlg_ok),
@@ -197,7 +197,7 @@ class AutoBuildBody(UserControl):
         self.dlg_ng = AlertDialog(
             # ダイアログの外側をクリックして閉じれないようにする
             modal=True,
-            title=Text("Input Dialog", size=25, font_family="Arial"),
+            title=Text("Dialog", size=25, font_family="Arial"),
             content=Text("必須項目を入力してください", size=15, font_family="YuGothic"),
             actions=[
                 TextButton("閉じる", on_click=self.handle_close_dlg_ng),

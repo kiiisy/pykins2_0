@@ -116,5 +116,11 @@ class MyJenkins():
         return time + ','.join(active_days)
 
     def get_all_job(self):
-        #return self.server.get_jobs()
-        pass
+        # 戻り値のデータフォーマット(dict in list)
+        # [{"__class__":"", "name":"", "url":"", "color":"", "fullname":""},
+        # {"__class__":"", "name":"", "url":"", "color":"", "fullname":""},
+        # ...]
+        return self.server.get_jobs()
+
+    def get_job_info(self, name):
+        return self.server.get_job_info(name)

@@ -24,6 +24,7 @@ from components.body0 import AutoBuildBody
 from components.body1 import AutoSimBody
 from components.body2 import EditJobBody
 from components.body3 import DashboardBody
+from components.body4 import SettingsBody
 from components.sidebar import NavBar
 import jenkins_module.my_jenkins as jmodule
 
@@ -33,7 +34,11 @@ class Pykins(UserControl):
         super().__init__()
         self.page = page
         self.jenkins = jmodule.MyJenkins()
-        self.body_list = [AutoBuildBody(self.page, self.jenkins), AutoSimBody(), EditJobBody(), DashboardBody(self.page, self.jenkins)]
+        self.body_list = [AutoBuildBody(self.page, self.jenkins),
+                          AutoSimBody(),
+                          EditJobBody(),
+                          DashboardBody(self.page, self.jenkins),
+                          SettingsBody()]
 
         # ボディ作成
         self.mycontents = Container(
@@ -79,7 +84,7 @@ class Pykins(UserControl):
         elif e.control.icon == "dashboard_rounded" :
             self.mycontents.content = self.body_list[3]
         elif e.control.icon == "settings_rounded" :
-            self.mycontents.content = self.body_list[3]
+            self.mycontents.content = self.body_list[4]
         self.update()
 
     def toggle_icon(self, e):
